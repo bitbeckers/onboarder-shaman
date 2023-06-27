@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
+import { IBaal } from "@daohaus/baal-contracts/contracts/interfaces/IBaal.sol";
+
 import { PRBTest } from "@prb/test/PRBTest.sol";
 import { console2 } from "forge-std/console2.sol";
 import { StdCheats } from "forge-std/StdCheats.sol";
@@ -15,10 +17,14 @@ interface IERC20 {
 /// https://book.getfoundry.sh/forge/writing-tests
 contract OnboarderShamanTest is PRBTest, StdCheats {
     OnboarderShaman internal onboarderShaman;
+    address internal molochDAO = vm.addr(666);
 
     /// @dev A function invoked before each test case is run.
     function setUp() public virtual {
-        // Instantiate the contract-under-test.
+        vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.sharesToken.selector), abi.encode(sharesToken));
+        vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.lootToken.selector), abi.encode(lootToken));
+        vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.target.selector), abi.encode(sharesToken));
+
         onboarderShaman = new OnboarderShaman();
     }
 
