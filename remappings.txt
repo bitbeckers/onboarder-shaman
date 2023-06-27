@@ -2,3 +2,5 @@
 forge-std/=lib/forge-std/src/
 src/=src/
 @daohaus/baal-contracts/contracts/=lib/Baal/contracts
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts
+

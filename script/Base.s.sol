@@ -11,14 +11,13 @@ abstract contract BaseScript is Script {
     bytes32 internal constant ZERO_SALT = bytes32(0);
 
     /// @dev The address of the contract deployer.
-    address internal deployer;
+    uint256 internal deployer;
 
     /// @dev Used to derive the deployer's address.
     string internal mnemonic;
 
     constructor() {
-        mnemonic = vm.envOr("MNEMONIC", TEST_MNEMONIC);
-        (deployer,) = deriveRememberKey({ mnemonic: mnemonic, index: 0 });
+        deployer = vm.envUint("PRIVATE_KEY");
     }
 
     modifier broadcaster() {

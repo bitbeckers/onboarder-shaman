@@ -22,6 +22,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf cache out",
+    "deploy": "forge script script/Deploy.s.sol:Deploy --broadcast --verify -vvvv --fork-url goerli",
     "lint": "pnpm lint:sol && pnpm prettier:check",
     "lint:sol": "forge fmt --check && pnpm solhint \"{script,src,test}/**/*.sol\"",
     "prettier:check": "prettier --check \"**/*.{json,md,yml}\"",
